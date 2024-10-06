@@ -1,0 +1,6 @@
+@Discs_HostAddress = http://localhost:5558
+
+GET {{Discs_HostAddress}}/api/discs
+Accept: application/json
+
+###

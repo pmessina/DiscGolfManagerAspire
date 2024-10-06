@@ -1,0 +1,73 @@
+﻿@page "/alldiscs"
+
+@inject DiscGolfManagerAspire.Web.Services.DiscServiceClient discService
+
+
+<PageTitle>All Discs</PageTitle>
+
+<table class="table table-success table-striped-columns">
+    <thead>
+        <tr class="table-primary">
+            <th scope="col">Name</th>
+            <th scope="col" @onclick="SortDiscs">Disc Type</th>
+            <th scope="col">Speed</th>
+            <th scope="col">Glide</th>
+            <th scope="col">Turn</th>
+            <th scope="col">Fade</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (discs != null)
+        {
+            foreach (var disc in discs)
+            {
+                <tr>
+                    <td>@disc.Name</td>
+                    <td>@disc.DiscType</td>
+                    <td>@disc.Speed</td>
+                    <td>@disc.Glide</td>
+                    <td>@disc.Turn</td>
+                    <td>@disc.Fade</td>
+                    <td><button type="button" onclick="@(() => DeleteDisc(disc.Id))" name="delete">Delete</button></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr class="table-primary">
+                <td>No discs</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+@code {
+    private List<DiscGolfManagerAspire.Web.Services.Disc>? discs;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        discs = await discService.GetAllDiscs();
+    }
+
+
+    private async void DeleteDisc(int id)
+    {
+        await discService.DeleteDiscById(id);
+        discs = await discService.GetAllDiscs();
+
+    }
+
+    private void SortDiscs()
+    {
+        if (discs != null)
+        {
+            discService.SortDiscs(discs);
+            StateHasChanged();
+        }
+
+    }
+
+}
