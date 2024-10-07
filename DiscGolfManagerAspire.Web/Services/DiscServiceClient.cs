@@ -19,9 +19,7 @@ namespace DiscGolfManagerAspire.Web.Services
 
         public async void CreateDisc(Disc disc)
         {
-            var result = await _httpClient.PostAsJsonAsync("/api/discs", disc);
-
-            //var result = await _httpClient.PutAsJsonAsync("/api/discs", disc);
+            var result = await _httpClient.PostAsJsonAsync("/api/discs/create", disc);
 
             if (result.IsSuccessStatusCode)
             {

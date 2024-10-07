@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DiscGolfManagerAspire.ApiService\DiscGolfManagerAspire.ApiService.csproj" />
+    <ProjectReference Include="..\DiscGolfManagerAspire.ApiService\DiscGolfManagerAspire.DiscsApiService.csproj" />
     <ProjectReference Include="..\DiscGolfManagerAspire.Web\DiscGolfManagerAspire.Web.csproj" />
     <ProjectReference Include="..\Discs\Discs.csproj" />
   </ItemGroup>

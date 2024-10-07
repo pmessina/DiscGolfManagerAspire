@@ -6,7 +6,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscGolfManagerAspire.AppHo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscGolfManagerAspire.ServiceDefaults", "DiscGolfManagerAspire.ServiceDefaults\DiscGolfManagerAspire.ServiceDefaults.csproj", "{56A55E01-D478-47AB-8746-4B8A02A17B4E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscGolfManagerAspire.ApiService", "DiscGolfManagerAspire.ApiService\DiscGolfManagerAspire.ApiService.csproj", "{D7A7A8F8-ACE0-4B5B-81BB-4ABD54C94B9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscGolfManagerAspire.DiscsApiService", "DiscGolfManagerAspire.ApiService\DiscGolfManagerAspire.DiscsApiService.csproj", "{D7A7A8F8-ACE0-4B5B-81BB-4ABD54C94B9D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscGolfManagerAspire.Web", "DiscGolfManagerAspire.Web\DiscGolfManagerAspire.Web.csproj", "{DC37E5F0-77E6-488F-A795-A30160450F20}"
 EndProject
