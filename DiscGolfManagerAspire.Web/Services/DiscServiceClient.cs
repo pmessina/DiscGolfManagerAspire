@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net;
 using System.Runtime.Serialization;
@@ -17,15 +18,16 @@ namespace DiscGolfManagerAspire.Web.Services
             this.manager = manager;
         }
 
-        public async void CreateDisc(Disc disc)
+        public async Task<IResult> CreateDisc(Disc disc)
         {
             var result = await _httpClient.PostAsJsonAsync("/api/discs/create", disc);
 
             if (result.IsSuccessStatusCode)
             {
-                manager.NavigateTo("/alldiscs");
+                //manager.NavigateTo("/alldiscs");
             }
-
+            return await Task.FromResult(Results.Created("CreateDisc", disc));
+            //return Results<Disc>.CreatedAtRoute("CreateDisc", new { id = disc.Id }, disc);
             //return await result.Content.ReadFromJsonAsync<Disc?>();
 
         }
@@ -47,9 +49,9 @@ namespace DiscGolfManagerAspire.Web.Services
             return null;
         }
 
-        public async Task UpdateDisc(int id, Disc disc)
+        public async Task UpdateDisc(Disc disc)
         {
-            await _httpClient.PutAsJsonAsync("/api/discs/{id}", disc);
+            await _httpClient.PutAsJsonAsync($"/api/discs/{disc.Id}", disc);
         }
 
         public async Task<List<Disc>?> GetAllDiscs()
@@ -81,7 +83,7 @@ namespace DiscGolfManagerAspire.Web.Services
         }
     }
 
-    public record Disc
+    public record Disc : IParameterPolicy
     {
         public int Id { get; set; }
 

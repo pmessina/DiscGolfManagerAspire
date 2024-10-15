@@ -12,6 +12,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscGolfManagerAspire.Web",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Discs", "Discs\Discs.csproj", "{73212F42-0E3A-4694-9105-53D7BC7F3CC3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{01660F82-40C3-4E2B-A9E3-E26AB548D6FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{73212F42-0E3A-4694-9105-53D7BC7F3CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73212F42-0E3A-4694-9105-53D7BC7F3CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73212F42-0E3A-4694-9105-53D7BC7F3CC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01660F82-40C3-4E2B-A9E3-E26AB548D6FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01660F82-40C3-4E2B-A9E3-E26AB548D6FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01660F82-40C3-4E2B-A9E3-E26AB548D6FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01660F82-40C3-4E2B-A9E3-E26AB548D6FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

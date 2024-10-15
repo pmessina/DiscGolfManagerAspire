@@ -1,0 +1,91 @@
+﻿@page "/discbag"
+@using DiscGolfManagerAspire.Utils
+@inject DiscServiceClient discService
+@inject NavigationManager manager
+
+
+<h3>Build your Disc Bag</h3>
+
+<EditForm Model="@selectedDiscs" OnValidSubmit="@(() => HandleSelectDiscsSubmit(selectedDiscs))" FormName="DiscBag">
+
+    <table>
+        <tr>
+            <td>
+                <label for="num">Number of Putters</label>
+            </td>
+            <td>
+                <InputNumber id="putters" @bind-Value="selectedDiscs.NumPutters" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label for="num">Number of Mid-Ranges</label>
+            </td>
+            <td>
+                <InputNumber id="midranges" @bind-Value="selectedDiscs.NumMidRanges" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="num">Number of Fairway Drivers</label>
+            </td>
+            <td>
+                <InputNumber id="numfairwaydrivers" @bind-Value="selectedDiscs.NumFairwayDrivers" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="num">Number of Distance Drivers</label>
+            </td>
+            <td>
+                <InputNumber id="numdistancedrivers" @bind-Value="selectedDiscs.NumDistanceDrivers" />
+            </td>
+        </tr>
+    </table>
+    <DiscResults discs="discs" />
+
+
+    <button type="Submit">Submit</button>
+</EditForm>
+
+
+
+
+@code {
+    [SupplyParameterFromForm]
+    protected DiscGolfBag selectedDiscs { get; set; } = new();
+    private List<Disc>? discs = new List<Disc>();
+
+    private async Task HandleSelectDiscsSubmit(DiscGolfBag selectedDiscs)
+    {
+        var list = new List<Disc>();
+
+        discs?.Clear();
+
+        var numPutters = await discService.GetDiscsbyDiscType(DiscType.Putter, selectedDiscs.NumPutters) ?? list;
+        var numMidRanges = await discService.GetDiscsbyDiscType(DiscType.MidRange, selectedDiscs.NumMidRanges) ?? list;
+        var numFairwayDrivers = await discService.GetDiscsbyDiscType(DiscType.FairwayDriver, selectedDiscs.NumFairwayDrivers) ?? list;
+        var numDistanceDrivers = await discService.GetDiscsbyDiscType(DiscType.DistanceDriver, selectedDiscs.NumDistanceDrivers) ?? list;
+
+        discs?.AddRange(numPutters);
+        discs?.AddRange(numMidRanges);
+        discs?.AddRange(numFairwayDrivers);
+        discs?.AddRange(numDistanceDrivers);
+
+        StateHasChanged();
+    }
+
+    public void ReloadPage()
+    {
+        manager.NavigateTo("/selectdiscs", true);
+    }
+
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     //discs = await discService.GetDiscsbyDiscType(DiscType.Putter, numDiscs);
+    //     discs = await discService.GetPutters(1);
+    // }
+}
+

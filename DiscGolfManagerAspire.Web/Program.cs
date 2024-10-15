@@ -13,6 +13,10 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddOutputCache();
 
+builder.Services.AddRouting(options =>
+    options.ConstraintMap.Add("Disc", typeof(Disc))
+); 
+
 builder.Services.AddHttpClient<DiscServiceClient>(client =>
     {
         // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.

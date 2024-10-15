@@ -1,6 +1,8 @@
 ﻿@page "/alldiscs"
 
 @inject DiscGolfManagerAspire.Web.Services.DiscServiceClient discService
+@inject NavigationManager navigationManager 
+@rendermode InteractiveServer
 
 
 <PageTitle>All Discs</PageTitle>
@@ -28,6 +30,7 @@
                     <td>@disc.Glide</td>
                     <td>@disc.Turn</td>
                     <td>@disc.Fade</td>
+                    <td><button type="button" onclick="@(() => EditDisc(disc.Id))" name="edit">Edit</button></td>
                     <td><button type="button" onclick="@(() => DeleteDisc(disc.Id))" name="delete">Delete</button></td>
                 </tr>
             }
@@ -57,6 +60,15 @@
     {
         await discService.DeleteDiscById(id);
         discs = await discService.GetAllDiscs();
+
+    }
+
+    private void EditDisc(int id)
+    {
+
+        navigationManager.NavigateTo($"/add/{id}");
+        //await discService.UpdateDisc(disc);
+        //discs = await discService.GetAllDiscs();
 
     }
 

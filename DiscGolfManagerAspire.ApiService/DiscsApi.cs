@@ -1,7 +1,9 @@
-﻿using Discs.Models;
+﻿using DiscGolfManagerAspire.Utils;
+using Discs.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 
 namespace DiscGolfManagerAspire.DiscsApiService
@@ -16,6 +18,20 @@ namespace DiscGolfManagerAspire.DiscsApiService
             {
                 return await context.Discs.ToListAsync();
             });
+
+            group.MapGet("discs/{id}", (DiscGolfDBContext context, int id) =>
+            {
+                Disc disc = context.Discs.Where(c => c.Id == id).FirstOrDefault() ?? new Disc();
+                return disc;
+            });
+
+            group.MapGet("discs/{discType}/{numDiscs}", (DiscGolfDBContext context, DiscType discType, int numDiscs) =>
+            {
+                List<Disc> discs = context.Discs.Where(c => c.DiscType == discType).ToList();
+                discs = RandUtils.GetRandomDiscs(discs, discType, numDiscs);
+                return discs;
+            }
+            );
 
             group.MapPost("discs/create", async (DiscGolfDBContext context, Disc disc) =>
             {
@@ -40,6 +56,8 @@ namespace DiscGolfManagerAspire.DiscsApiService
                 return Results.Ok();
 
             });
+
+
 
             return group;
         }

@@ -1,0 +1,41 @@
+﻿
+<table class="table-primary">
+    <thead>
+        <tr class="table-primary">
+            <th scope="col">Name</th>
+            <th scope="col">Speed</th>
+            <th scope="col">Glide</th>
+            <th scope="col">Turn</th>
+            <th scope="col">Fade</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (discs != null)
+        {
+            foreach (var disc in discs)
+            {
+                <tr class="table-primary">
+                    <td>@disc.Name</td>
+                    <td>@disc.DiscType.ToString()</td>
+                    <td>@disc.Speed</td>
+                    <td>@disc.Glide</td>
+                    <td>@disc.Turn</td>
+                    <td>@disc.Fade</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr class="table-primary">
+                <td>No discs</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+@code {
+    [Parameter]
+    public List<Disc> discs { get; set; } = new List<Disc>();
+}

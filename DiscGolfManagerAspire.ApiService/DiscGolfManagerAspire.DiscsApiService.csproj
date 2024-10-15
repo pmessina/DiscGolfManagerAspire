@@ -17,7 +17,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DiscGolfManagerAspire.ServiceDefaults\DiscGolfManagerAspire.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\DiscGolfManagerAspire.Web\DiscGolfManagerAspire.Web.csproj" />
     <ProjectReference Include="..\Discs\Discs.csproj" />
+    <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
 
 </Project>
