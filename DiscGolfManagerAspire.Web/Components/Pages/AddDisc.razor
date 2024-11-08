@@ -100,7 +100,7 @@
 
 
 @code{
-    //[SupplyParameterFromForm]
+    [SupplyParameterFromForm]
     public required Disc NewDisc { get; set; } = new();
 
     [Parameter]
@@ -135,15 +135,15 @@
         base.OnParametersSet();
     }
 
-    protected override async bool ShouldRender()
-    {
-        var result = await discService.GetDisc(Id);
+    //protected override async bool ShouldRender()
+    //{
+    //    var result = await discService.GetDisc(Id);
 
-        NewDisc = result ?? new Disc();
+    //    NewDisc = result ?? new Disc();
 
-        StateHasChanged();
-        return Task<bool>.FromResult(base.ShouldRender()).Result;
-    }
+    //    StateHasChanged();
+    //    return Task<bool>.FromResult(base.ShouldRender()).Result;
+    //}
 
     private async void HandleAddDiscSubmit(Disc disc)
     {

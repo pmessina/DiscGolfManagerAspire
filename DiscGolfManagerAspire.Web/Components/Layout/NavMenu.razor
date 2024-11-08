@@ -9,12 +9,28 @@
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column">
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill" aria-hidden="true"></span> Home
-            </NavLink>
+            @*<NavLink class="nav-link" href="" Match="NavLinkMatch.All">*@
+            @*<span class="bi bi-house-door-fill" aria-hidden="true"></span> Home*@
+            
+
+            <RadzenStack Orientation="Orientation.Horizontal" Wrap="FlexWrap.Wrap" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center" class="icon-preview rz-p-12">
+                <RadzenCard class="rz-p-2">
+                    <RadzenIcon Icon="home" IconColor="@Colors.Success" />
+                    <RadzenButton Text="My Discs" ButtonStyle="ButtonStyle.Base" />
+                </RadzenCard>
+                    <RadzenIcon Icon="home" IconColor="@Colors.Success" />
+                
+            </RadzenStack>
+
+            <RadzenStack Orientation="Orientation.Vertical" Wrap="FlexWrap.Wrap" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center" class="icon-preview rz-p-12">
+                <RadzenCard Icon="home" IconColor="@Colors.Success" />Home
+                <RadzenCard Icon="home" IconColor="@Colors.Success" />My Discs
+            </RadzenStack>
+
+            @*</NavLink>*@
         </div>
 
-        <div class="nav-item px-3">
+        @*<div class="nav-item px-3">
             <NavLink class="nav-link" href="alldiscs">
                 <span class="d d-block" aria-hidden="true"></span> My Discs
             </NavLink>
@@ -30,7 +46,7 @@
             <NavLink class="nav-link" href="discbag">
                 <span class="bi bi-plus-square-fill" aria-hidden="true"></span> Disc Bag
             </NavLink>
-        </div>
+        </div>*@
 
     </nav>
 </div>

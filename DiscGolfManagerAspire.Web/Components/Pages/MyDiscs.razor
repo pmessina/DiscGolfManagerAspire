@@ -1,13 +1,24 @@
 ﻿@page "/alldiscs"
 
-@inject DiscGolfManagerAspire.Web.Services.DiscServiceClient discService
+@inject DiscServiceClient discService
 @inject NavigationManager navigationManager 
 @rendermode InteractiveServer
 
 
 <PageTitle>All Discs</PageTitle>
 
-<table class="table table-success table-striped-columns">
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" Data="@discs" ColumnWidth="300px" PageSize="1">
+    <Columns>
+        <RadzenDataGridColumn Property="@nameof(Disc.Name)" Title="Name" Width="100px" />
+        <RadzenDataGridColumn Property="@nameof(Disc.DiscType)" Title="Disc Type" Width="100px" />
+        <RadzenDataGridColumn Property="@nameof(Disc.Speed)" Title="Speed" Width="100px" />
+        <RadzenDataGridColumn Property="@nameof(Disc.Glide)" Title="Glide" Width="100px" />
+        <RadzenDataGridColumn Property="@nameof(Disc.Fade)" Title="Fade" Width="100px" />
+        <RadzenDataGridColumn Property="@nameof(Disc.Turn)" Title="Turn" Width="100px" />
+    </Columns>
+</RadzenDataGrid>
+
+@*<table class="table table-success table-striped-columns">
     <thead>
         <tr class="table-primary">
             <th scope="col">Name</th>
@@ -43,11 +54,11 @@
         }
 
     </tbody>
-</table>
+</table>*@
 
 
 @code {
-    private List<DiscGolfManagerAspire.Web.Services.Disc>? discs;
+    private List<Disc>? discs;
 
 
     protected override async Task OnInitializedAsync()

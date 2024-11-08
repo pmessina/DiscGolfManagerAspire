@@ -1,6 +1,7 @@
 using DiscGolfManagerAspire.Web;
 using DiscGolfManagerAspire.Web.Components;
 using DiscGolfManagerAspire.Web.Services;
+using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ builder.AddServiceDefaults();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddRadzenComponents();
+builder.Services.AddBlazorBootstrap();
 
 builder.Services.AddOutputCache();
 
