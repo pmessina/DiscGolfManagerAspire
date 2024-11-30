@@ -1,5 +1,7 @@
 ﻿using DiscGolfManagerAspire.Utils;
 using Discs.Models;
+//using DiscGolfManagerAspire.Web.Services;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -46,7 +48,7 @@ namespace DiscGolfManagerAspire.DiscsApiService
             {
                 if (id != disc.Id) return Results.BadRequest();
 
-                if (!context.Discs.Any(e=>e.Id == id))
+                if (!context.Discs.Any(e => e.Id == id))
                 {
                     return Results.NotFound();
                 }

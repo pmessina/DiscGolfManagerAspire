@@ -8,18 +8,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add service defaults & Aspire components.
 builder.AddServiceDefaults();
 
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+
 builder.Services.AddRadzenComponents();
-builder.Services.AddBlazorBootstrap();
 
 builder.Services.AddOutputCache();
 
 builder.Services.AddRouting(options =>
     options.ConstraintMap.Add("Disc", typeof(Disc))
-); 
+);
 
 builder.Services.AddHttpClient<DiscServiceClient>(client =>
     {

@@ -5,3 +5,27 @@
 <h1>Hello, world!</h1>
 
 Welcome to the Disc Manager Application powered by .NET Aspire!
+
+<RadzenAccordion>
+    <Items>
+        <RadzenAccordionItem @bind-Expanded="@expandedFlag" Text="My Discs" Icon="account_balance_wallet" CollapseTitle="Collapse orders."
+                             ExpandTitle="Expand orders." CollapseAriaLabel="Collapse the order details."
+                             ExpandAriaLabel="Expand the order details.">
+            Details for Orders
+        </RadzenAccordionItem>
+        <RadzenAccordionItem Text="Add Disc" Icon="account_box" CollapseTitle="Collapse employees."
+                             ExpandTitle="Expand employees." CollapseAriaLabel="Collapse the employee details."
+                             ExpandAriaLabel="Expand the employee details.">
+            Details for Employees
+        </RadzenAccordionItem>
+        <RadzenAccordionItem Text="Disc Bag" Icon="accessibility" CollapseTitle="Collapse customers."
+                             ExpandTitle="Expand customers." CollapseAriaLabel="Collapse the customer details."
+                             ExpandAriaLabel="Expand the customer details.">
+            Details for Customers
+        </RadzenAccordionItem>
+    </Items>
+</RadzenAccordion>
+
+@code{
+    bool expandedFlag = true;
+}

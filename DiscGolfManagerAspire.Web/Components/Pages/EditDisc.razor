@@ -1,0 +1,160 @@
+﻿@page "/edit"
+@page "/edit/{Id:int}"
+
+@using DiscGolfManagerAspire.Web.Services;
+@inject NavigationManager navMgr
+@inject DiscServiceClient discService
+
+<PageTitle>Disc Golf Manager</PageTitle>
+
+<h3>Add New Discs</h3>
+
+<EditForm FormName="main" Model="@NewDisc" OnValidSubmit="@(() => HandleEditDiscSubmit(@NewDisc!))">
+
+    <table class="table tab">
+
+        <tr>
+            <td>
+                <label scope="col">Name</label>
+            </td>
+            <td>
+                <InputText placeholder="Name of Disc" id="name" @bind-Value="NewDisc!.Name" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label scope="col">Speed</label>
+            </td>
+            <td>
+                <InputNumber id="speed" @bind-Value="NewDisc.Speed" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label scope="col">Glide</label>
+            </td>
+            <td>
+                <InputNumber id="glide" @bind-Value="NewDisc.Glide" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label scope="col">Turn</label>
+            </td>
+            <td>
+                <InputNumber id="turn" @bind-Value="NewDisc.Turn" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label scope="col">Fade</label>
+            </td>
+            <td>
+                <InputNumber id="fade" @bind-Value="NewDisc.Fade" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label scope="col">Disc Type</label>
+            </td>
+            <td>
+                <InputSelect id="disctype" @bind-Value="NewDisc!.DiscType">
+                    @foreach (DiscType enumValue in Enum.GetValues(typeof(DiscType)))
+                    {
+                        <option value="@enumValue">@enumValue.ToString()</option>
+                    }
+                </InputSelect>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label scope="col">Disc Manufacturer</label>
+            </td>
+            <td>
+                <InputSelect id="disctype" @bind-Value="NewDisc!.Manufacturer">
+                    @foreach (Manufacturer enumValue in Enum.GetValues(typeof(Manufacturer)))
+                    {
+                        <option value="@enumValue">@enumValue.ToString()</option>
+                    }
+                </InputSelect>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label scope="col">Plastic</label>
+            </td>
+            <td>
+                <InputText placeholder="Plastic" id="plastic" @bind-Value="NewDisc!.Plastic" />
+            </td>
+        </tr>
+
+    </table>
+    <button name="Submit" type="submit">Submit</button>
+
+
+    @if (submitIsSuccessful)
+    {
+        <div class="alert alert-success" role="alert">Disc Edited Successfully</div>
+    }
+</EditForm>
+
+
+@code{
+    [Parameter]
+    public required Disc NewDisc { get; set; } = new();
+
+
+    [Parameter]
+    public required int Id { get; set; }
+
+    private bool submitIsSuccessful = false;
+
+    DiscType SelectedEnumValue { get; set; } = DiscType.Putter;
+
+    protected override async void OnInitialized()
+    {
+        //We are editing an existing Id
+
+        //var result = await discService.GetDisc(NewDisc.Id);
+
+        //NewDisc = result ?? new Disc();
+
+        //navMgr.NavigateTo("add", replace:true);
+
+
+        base.OnInitialized();
+    }
+
+    protected override async void OnParametersSet()
+    {
+        //var result = await discService.GetDisc(Id);
+
+        //NewDisc = result ?? new Disc();
+
+        //StateHasChanged();
+        //base.OnParametersSet();
+    }
+
+    //protected override async bool ShouldRender()
+    //{
+    //    var result = await discService.GetDisc(Id);
+
+    //    NewDisc = result ?? new Disc();
+
+    //    StateHasChanged();
+    //    return Task<bool>.FromResult(base.ShouldRender()).Result;
+    //}
+
+    private async void HandleEditDiscSubmit(Disc disc)
+    {
+        await discService.UpdateDisc(disc);
+
+        submitIsSuccessful = true;
+
+
+        //navMgr.NavigateTo("alldiscs");
+    }
+
+
+}
+

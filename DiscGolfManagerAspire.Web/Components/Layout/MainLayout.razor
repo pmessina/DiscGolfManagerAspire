@@ -1,18 +1,54 @@
 ﻿@inherits LayoutComponentBase
 
+
+<RadzenComponents @rendermode="InteractiveServer" />
+
 <div class="page">
-    <div class="sidebar">
+    @*<div class="sidebar">
         <NavMenu />
-    </div>
+    </div>*@
 
     <main>
         <div class="top-row px-4">
             <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
         </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
+    <RadzenLayout>
+
+        @*<div class="sidebar">*@
+            <RadzenHeader>
+                <RadzenStack>
+                    <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
+                        <RadzenSidebarToggle Click="@(() => sidebar1Expanded = !sidebar1Expanded)" />
+                        <RadzenLabel Text="Header" />
+                    </RadzenStack>
+                </RadzenStack>
+            </RadzenHeader>
+        @*</div>*@
+        <!--Side bar-->
+        <RadzenSidebar @bind-Expanded="@sidebar1Expanded">
+            <RadzenPanelMenu>
+                <RadzenPanelMenuItem Text="My Discs" Icon="donut_large" Path="alldiscs" />
+                <RadzenPanelMenuItem Text="Add New Disc" Path="add" Icon="account_box" />
+                <RadzenPanelMenuItem Text="Disc Bag" Path="discbag" Icon="card_giftcard" />
+            </RadzenPanelMenu>
+        </RadzenSidebar>
+
+        <RadzenBody>
+            <div class="content rz-p-4">
+                @Body
+            </div>
+        </RadzenBody>
+        <RadzenFooter>
+            <RadzenStack>
+                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
+                    <RadzenLabel Text="Footer" />
+                </RadzenStack>
+            </RadzenStack>
+        </RadzenFooter>
+    </RadzenLayout>
+
+
     </main>
 </div>
 
@@ -21,3 +57,9 @@
     <a href="" class="reload">Reload</a>
     <a class="dismiss">🗙</a>
 </div>
+
+
+@code {
+    bool expandedFlag = true;
+    bool sidebar1Expanded = true;
+}

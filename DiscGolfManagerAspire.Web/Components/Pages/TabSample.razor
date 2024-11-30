@@ -1,0 +1,103 @@
+﻿@page "/TabSample"
+@rendermode InteractiveServer
+
+<h3>TabSample</h3>
+
+
+
+<RadzenTabs Change=@OnChange RenderMode="TabRenderMode.Client">
+    <Tabs>
+        <RadzenTabsItem Text="Orders">
+            <RadzenAccordion>
+                <Items>
+                    <RadzenAccordionItem Selected="true" Text="My Discs" Icon="account_balance_wallet" CollapseTitle="Collapse orders."
+                                         ExpandTitle="Expand orders." CollapseAriaLabel="Collapse the order details."
+                                         ExpandAriaLabel="Expand the order details.">
+                        Details for Orders
+                    </RadzenAccordionItem>
+                    <RadzenAccordionItem Text="Add Disc" Icon="account_box" CollapseTitle="Collapse employees."
+                                         ExpandTitle="Expand employees." CollapseAriaLabel="Collapse the employee details."
+                                         ExpandAriaLabel="Expand the employee details.">
+                        Details for Employees
+                    </RadzenAccordionItem>
+                    <RadzenAccordionItem Text="Disc Bag" Icon="accessibility" CollapseTitle="Collapse customers."
+                                         ExpandTitle="Expand customers." CollapseAriaLabel="Collapse the customer details."
+                                         ExpandAriaLabel="Expand the customer details.">
+                        Details for Customers
+                    </RadzenAccordionItem>
+                </Items>
+            </RadzenAccordion>
+        </RadzenTabsItem>
+        <RadzenTabsItem Text="Employee">
+            <RadzenAccordion>
+                <Items>
+                    <RadzenAccordionItem Selected="true" Text="My Discs" Icon="account_balance_wallet" CollapseTitle="Collapse orders."
+                                         ExpandTitle="Expand orders." CollapseAriaLabel="Collapse the order details."
+                                         ExpandAriaLabel="Expand the order details.">
+                        Details for Orders
+                    </RadzenAccordionItem>
+                    <RadzenAccordionItem Text="Add Disc" Icon="account_box" CollapseTitle="Collapse employees."
+                                         ExpandTitle="Expand employees." CollapseAriaLabel="Collapse the employee details."
+                                         ExpandAriaLabel="Expand the employee details.">
+                        Details for Employees
+                    </RadzenAccordionItem>
+                    <RadzenAccordionItem Text="Disc Bag" Icon="accessibility" CollapseTitle="Collapse customers."
+                                         ExpandTitle="Expand customers." CollapseAriaLabel="Collapse the customer details."
+                                         ExpandAriaLabel="Expand the customer details.">
+                        Details for Customers
+                    </RadzenAccordionItem>
+                </Items>
+            </RadzenAccordion>
+        </RadzenTabsItem>
+        <RadzenTabsItem Text="Customers">
+            <RadzenAccordion>
+                <Items>
+                    <RadzenAccordionItem Selected="true" Text="My Discs" Icon="account_balance_wallet" CollapseTitle="Collapse orders."
+                                         ExpandTitle="Expand orders." CollapseAriaLabel="Collapse the order details."
+                                         ExpandAriaLabel="Expand the order details.">
+                        Details for Orders
+                    </RadzenAccordionItem>
+                    <RadzenAccordionItem Text="Add Disc" Icon="account_box" CollapseTitle="Collapse employees."
+                                         ExpandTitle="Expand employees." CollapseAriaLabel="Collapse the employee details."
+                                         ExpandAriaLabel="Expand the employee details.">
+                        Details for Employees
+                    </RadzenAccordionItem>
+                    <RadzenAccordionItem Text="Disc Bag" Icon="accessibility" CollapseTitle="Collapse customers."
+                                         ExpandTitle="Expand customers." CollapseAriaLabel="Collapse the customer details."
+                                         ExpandAriaLabel="Expand the customer details.">
+                        Details for Customers
+                    </RadzenAccordionItem>
+                </Items>
+            </RadzenAccordion>
+        </RadzenTabsItem>
+    </Tabs>
+</RadzenTabs>
+
+
+
+<RadzenButton Click="@ButtonClicked" Text="Hi"></RadzenButton>
+<div>@response</div>
+@code {
+    string response = "";
+    void ButtonClicked()
+    {
+        response = "Hello";
+    }
+}
+
+
+@code {
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+
+    }
+
+    void OnChange(int index)
+    {
+
+    }
+}

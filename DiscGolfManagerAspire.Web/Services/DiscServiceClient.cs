@@ -51,7 +51,7 @@ namespace DiscGolfManagerAspire.Web.Services
 
         public async Task UpdateDisc(Disc disc)
         {
-            await _httpClient.PutAsJsonAsync($"/api/discs/{disc.Id}", disc);
+            await _httpClient.PutAsJsonAsync($"/api/discs/edit/{disc.Id}", disc);
         }
 
         public async Task<List<Disc>?> GetAllDiscs()
