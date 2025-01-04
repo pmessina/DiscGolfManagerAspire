@@ -1,5 +1,6 @@
 ﻿@page "/alldiscs"
 
+@rendermode InteractiveServer
 @using Microsoft.JSInterop
 @using System.Text.Json
 
@@ -8,12 +9,10 @@
 
 @inject DiscServiceClient discService
 @inject NavigationManager navigationManager
-@rendermode InteractiveServer
-
 
 <PageTitle>All Discs</PageTitle>
 
-<RadzenDataGrid RowClick="@((args)=>SelectDisc(args))" TItem="Disc" AllowFiltering="true" AllowColumnResize="true" Data="@discs" ColumnWidth="300px" PageSize="1">
+<RadzenDataGrid  RowClick="@((args)=>SelectDisc(args))" FilterPopupRenderMode="PopupRenderMode.OnDemand" RowSelect="@RowSelect" @bind-Value="@selectedDisc" TItem="Disc" AllowFiltering="true" AllowColumnResize="true" Data="@discs" ColumnWidth="300px" PageSize="2">
     <Columns>
         <RadzenDataGridColumn Property="@nameof(Disc.Name)" Title="Name" Width="100px" />
         <RadzenDataGridColumn Property="@nameof(Disc.DiscType)" Title="Disc Type" Width="100px" />
@@ -21,55 +20,33 @@
         <RadzenDataGridColumn Property="@nameof(Disc.Glide)" Title="Glide" Width="100px" />
         <RadzenDataGridColumn Property="@nameof(Disc.Turn)" Title="Turn" Width="100px" />
         <RadzenDataGridColumn Property="@nameof(Disc.Fade)" Title="Fade" Width="100px" />
+        <RadzenDataGridColumn TItem="Disc" Context="disc">
+            <Template>
+                <RadzenButton Icon="delete" Size="ButtonSize.Small" Click="@(args => DeleteDisc(disc.Id))" />
+            </Template>
+        </RadzenDataGridColumn>
     </Columns>
 </RadzenDataGrid>
 
-@*<table class="table table-success table-striped-columns">
-        <thead>
-            <tr class="table-primary">
-                <th scope="col">Name</th>
-                <th scope="col" @onclick="SortDiscs">Disc Type</th>
-                <th scope="col">Speed</th>
-                <th scope="col">Glide</th>
-                <th scope="col">Turn</th>
-                <th scope="col">Fade</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (discs != null)
-            {
-                foreach (var disc in discs)
-                {
-                    <tr>
-                        <td>@disc.Name</td>
-                        <td>@disc.DiscType</td>
-                        <td>@disc.Speed</td>
-                        <td>@disc.Glide</td>
-                        <td>@disc.Turn</td>
-                        <td>@disc.Fade</td>
-                        <td><button type="button" onclick="@(() => EditDisc(disc.Id))" name="edit">Edit</button></td>
-                        <td><button type="button" onclick="@(() => DeleteDisc(disc.Id))" name="delete">Delete</button></td>
-                    </tr>
-                }
-            }
-            else
-            {
-                <tr class="table-primary">
-                    <td>No discs</td>
-                </tr>
-            }
-
-        </tbody>
-    </table>*@
+<div class="rz-p-4">@selectedInDiscBag</div>
 
 
 @code {
     private List<Disc>? discs;
+    private IList<Disc> selectedDisc;
 
+    private Disc selectedInDiscBag;
 
     protected override async Task OnInitializedAsync()
     {
         discs = await discService.GetAllDiscs();
+        //selectedDisc = discs.Take(1).ToList();
+
+    }
+
+    void RowSelect()
+    {
+        
     }
 
 
@@ -126,7 +103,9 @@
     {
         Disc disc = args.Data;
 
-        await LoadStateAsync();
+        //selectedInDiscBag = disc;
+
+        //await LoadStateAsync();
 
         await DialogService.OpenAsync<EditDisc>("title",
                new Dictionary<string, object>() { { "NewDisc", disc } },
@@ -139,11 +118,24 @@
                    Width = Settings != null ? Settings.Width : "700px",
                    Height = Settings != null ? Settings.Height : "512px",
                    Left = Settings != null ? Settings.Left : null,
-                   Top = Settings != null ? Settings.Top : null
-               });
+                   Top = Settings != null ? Settings.Top : null,
 
-        await SaveStateAsync();
+               });
+        
+
+        //selectedDisc = null;
+
+
+        //DialogService.OnClose += OnDialogClose;
+
+        //await SaveStateAsync();
     }
+
+    void OnDialogClose(dynamic result)
+    {
+        selectedDisc = null;
+    }
+
 
 
     void OnDrag(System.Drawing.Point point)

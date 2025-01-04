@@ -2,8 +2,10 @@
 @page "/add/{Id:int}"
 
 @using DiscGolfManagerAspire.Web.Services;
+@using System.Text.Json;
 @inject NavigationManager navMgr
 @inject DiscServiceClient discService
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Disc Golf Manager</PageTitle>
 
@@ -18,7 +20,7 @@
                 <label scope="col">Name</label>
             </td>
             <td>
-                <InputText placeholder="Name of Disc" id="name" @bind-Value="NewDisc!.Name" />
+                <InputText placeholder="Name of Disc" id="name" @bind-Value="NewDisc!.Name" @oninput="HandleInputChange" />
             </td>
         </tr>
         <tr>
@@ -89,6 +91,7 @@
         </tr>
 
     </table>
+
     <button name="Submit" type="submit">Submit</button>
 
 
@@ -112,14 +115,17 @@
 
     protected override async void OnInitialized()
     {
-        //We are editing an existing Id
-        if (Id != 0)
+        // Check if disc exists in local storage
+        var jsonDisc = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "newDisc");
+        if (!string.IsNullOrEmpty(jsonDisc))
         {
+            NewDisc = JsonSerializer.Deserialize<Disc>(jsonDisc) ?? new Disc();
+        }
+        else if (Id != 0)
+        {
+            // We are editing an existing Id
             var result = await discService.GetDisc(Id);
-
             NewDisc = result ?? new Disc();
-
-            //navMgr.NavigateTo("add", replace:true);
         }
 
         base.OnInitialized();
@@ -135,26 +141,22 @@
         base.OnParametersSet();
     }
 
-    //protected override async bool ShouldRender()
-    //{
-    //    var result = await discService.GetDisc(Id);
-
-    //    NewDisc = result ?? new Disc();
-
-    //    StateHasChanged();
-    //    return Task<bool>.FromResult(base.ShouldRender()).Result;
-    //}
-
     private async void HandleAddDiscSubmit(Disc disc)
     {
+        // Store disc in local storage
+        var jsonDisc = JsonSerializer.Serialize(disc);
+        await JSRuntime.InvokeVoidAsync("localStorage.setItem", "newDisc", jsonDisc);
+
         var result = await discService.CreateDisc(disc);
 
         submitIsSuccessful = true;
 
-
         //navMgr.NavigateTo("alldiscs");
     }
 
-
+    private void HandleInputChange(ChangeEventArgs e)
+    {
+        var newValue = e.Value?.ToString();
+        Console.WriteLine($"Input changed to: {newValue}");
+    }
 }
-

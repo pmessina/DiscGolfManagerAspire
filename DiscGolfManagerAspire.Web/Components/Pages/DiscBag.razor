@@ -6,6 +6,19 @@
 
 <h3>Build your Disc Bag</h3>
 
+<RadzenRadioButtonList @bind-Value="@value" TValue="int">
+    <Items>
+        <RadzenRadioButtonListItem Text="Random" Value="1" />
+        <RadzenRadioButtonListItem Text="Manual" Value="2" />
+    </Items>
+</RadzenRadioButtonList>
+<div class="rz-p-4">@value</div>
+
+@if (value == 1)
+{
+    <MyDiscs />
+}
+
 <EditForm Model="@selectedDiscs" OnValidSubmit="@(() => HandleSelectDiscsSubmit(selectedDiscs))" FormName="DiscBag">
 
     <table>
@@ -53,6 +66,9 @@
 
 
 @code {
+
+    int value = 1;
+
     [SupplyParameterFromForm]
     protected DiscGolfBag selectedDiscs { get; set; } = new();
     private List<Disc>? discs = new List<Disc>();

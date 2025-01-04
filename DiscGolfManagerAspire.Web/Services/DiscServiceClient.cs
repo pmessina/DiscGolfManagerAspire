@@ -93,7 +93,7 @@ namespace DiscGolfManagerAspire.Web.Services
 
         public double Speed { get; set; }
 
-        public int Glide { get; set; }
+        public double Glide { get; set; }
 
         public double Turn { get; set; }
 
@@ -108,7 +108,7 @@ namespace DiscGolfManagerAspire.Web.Services
         [NotMapped]
         public int TimesUsed { get; set; }
 
-        public static Disc Create(string name, string plastic, double speed, int glide, double turn, double fade)
+        public static Disc Create(string name, string plastic, double speed, double glide, double turn, double fade)
         {
             return new Disc
             {

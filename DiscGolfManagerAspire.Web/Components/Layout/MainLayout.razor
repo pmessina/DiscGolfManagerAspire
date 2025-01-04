@@ -1,52 +1,50 @@
 ﻿@inherits LayoutComponentBase
 
-
-<RadzenComponents @rendermode="InteractiveServer" />
-
+<RadzenDialog @rendermode="InteractiveServer" />
 <div class="page">
     @*<div class="sidebar">
-        <NavMenu />
-    </div>*@
+            <NavMenu />
+        </div>*@
 
     <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
 
-    <RadzenLayout>
-
-        @*<div class="sidebar">*@
+        <RadzenLayout>
             <RadzenHeader>
                 <RadzenStack>
                     <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
                         <RadzenSidebarToggle Click="@(() => sidebar1Expanded = !sidebar1Expanded)" />
-                        <RadzenLabel Text="Header" />
+                        <div class="px-4">
+                            <RadzenLabel Text="Header" />
+                        </div>
+                        <div class="px-4">
+                            <RadzenLink Path="https://learn.microsoft.com/aspnet/core/" Text="About" Target="_blank" />
+                        </div>
                     </RadzenStack>
                 </RadzenStack>
             </RadzenHeader>
-        @*</div>*@
-        <!--Side bar-->
-        <RadzenSidebar @bind-Expanded="@sidebar1Expanded">
-            <RadzenPanelMenu>
-                <RadzenPanelMenuItem Text="My Discs" Icon="donut_large" Path="alldiscs" />
-                <RadzenPanelMenuItem Text="Add New Disc" Path="add" Icon="account_box" />
-                <RadzenPanelMenuItem Text="Disc Bag" Path="discbag" Icon="card_giftcard" />
-            </RadzenPanelMenu>
-        </RadzenSidebar>
+            <!--Side bar-->
+            <RadzenSidebar @bind-Expanded="@sidebar1Expanded">
+                <RadzenPanelMenu>
+                    <RadzenPanelMenuItem Text="My Discs" Path="alldiscs" Icon="donut_large" />
+                    <RadzenPanelMenuItem Text="Add New Disc" Path="add" Icon="account_box" />
+                    <RadzenPanelMenuItem Text="Disc Bag" Path="discbag" Icon="card_giftcard" />
+                    <RadzenPanelMenuItem Text="Sample Html" Path="sample" Icon="home" />
+                </RadzenPanelMenu>
+            </RadzenSidebar>
 
-        <RadzenBody>
-            <div class="content rz-p-4">
-                @Body
-            </div>
-        </RadzenBody>
-        <RadzenFooter>
-            <RadzenStack>
-                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
-                    <RadzenLabel Text="Footer" />
+            <RadzenBody>
+                <div class="content rz-p-4">
+                    @Body
+                </div>
+            </RadzenBody>
+            <RadzenFooter>
+                <RadzenStack>
+                    <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
+                        <RadzenLabel Text="Footer" />
+                    </RadzenStack>
                 </RadzenStack>
-            </RadzenStack>
-        </RadzenFooter>
-    </RadzenLayout>
+            </RadzenFooter>
+        </RadzenLayout>
 
 
     </main>

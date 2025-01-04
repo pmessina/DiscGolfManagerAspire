@@ -13,6 +13,8 @@ builder.AddServiceDefaults();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddScoped<DialogService>();
+
 
 builder.Services.AddRadzenComponents();
 
