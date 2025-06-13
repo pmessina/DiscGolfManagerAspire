@@ -24,9 +24,20 @@ namespace DiscGolfManagerAspire.Web.Services
 
             if (result.IsSuccessStatusCode)
             {
-                //manager.NavigateTo("/alldiscs");
+                return Results.Created("CreateDisc", disc);
             }
-            return await Task.FromResult(Results.Created("CreateDisc", disc));
+            else
+            {
+                var errorContent = await result.Content.ReadAsStringAsync();
+                // Log or display errorContent for debugging
+                throw new Exception($"API Error: {result.StatusCode} - {errorContent}");
+            }
+
+            //if (result.IsSuccessStatusCode)
+            //{
+            //    //manager.NavigateTo("/alldiscs");
+            //}
+            //return await Task.FromResult(Results.Created("CreateDisc", disc));
             //return Results<Disc>.CreatedAtRoute("CreateDisc", new { id = disc.Id }, disc);
             //return await result.Content.ReadFromJsonAsync<Disc?>();
 
@@ -102,27 +113,6 @@ namespace DiscGolfManagerAspire.Web.Services
         public Manufacturer Manufacturer { get; set; }
 
         public DiscType DiscType { get; set; }
-
-        [JsonIgnore]
-        [IgnoreDataMember]
-        [NotMapped]
-        public int TimesUsed { get; set; }
-
-        public static Disc Create(string name, string plastic, double speed, double glide, double turn, double fade)
-        {
-            return new Disc
-            {
-                Name = name,
-                Plastic = plastic,
-                Speed = speed,
-                Glide = glide,
-                Turn = turn,
-                Fade = fade,
-                Manufacturer = Manufacturer.Innova,
-                DiscType = DiscType.Putter
-            };
-        }
-
 
     }
 

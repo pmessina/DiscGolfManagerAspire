@@ -28,26 +28,25 @@ public class Disc
 
     public DiscType DiscType { get; set; }
 
-    [JsonIgnore]
-    [IgnoreDataMember]
-    [NotMapped]
-    public int TimesUsed { get; set; }
-
     public static Disc Create(string name, string plastic, double speed, int glide, double turn, double fade)
     {
-        return new Disc { Name = name, 
-            Plastic = plastic, 
-            Speed = speed, 
-            Glide = glide, 
-            Turn = turn, 
+        return new Disc
+        {
+            Name = name,
+            Plastic = plastic,
+            Speed = speed,
+            Glide = glide,
+            Turn = turn,
             Fade = fade,
             Manufacturer = Manufacturer.Innova,
             DiscType = DiscType.Putter
         };
     }
-
-
 }
+
+
+
+
 
 public enum Manufacturer
 {
